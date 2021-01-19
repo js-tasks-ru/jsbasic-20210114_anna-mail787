@@ -4,5 +4,11 @@
  * @returns {boolean}
  */
 function checkSpam(str) {
-  // ваш код...
+  const SPAM_STR = ['1XbeT', 'xxx'];
+  for (let i = 0; i < SPAM_STR.length; i++) {
+    if (str.includes(SPAM_STR[i])) {
+      return true;
+    }
+  }
+  return false;
 }

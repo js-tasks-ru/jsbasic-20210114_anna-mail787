@@ -4,5 +4,12 @@
  * @returns {Boolean}
  */
 function isEmpty(obj) {
-  // ваш код...
+  let empty = true;
+
+  for (let prop in obj) {
+    empty = false;
+    break;
+  }
+
+  return empty;
 }

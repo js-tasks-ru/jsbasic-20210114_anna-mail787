@@ -4,5 +4,10 @@
  * @returns {{min:number, max:number}}  объект
  */
 function getMinMax(str) {
-  // ваш код...
+  const numbers = str.split(/,| /).filter(item => Number(item));
+  const result = {
+    min: Math.min(...numbers),
+    max: Math.max(...numbers)
+  }
+  return result;
 }

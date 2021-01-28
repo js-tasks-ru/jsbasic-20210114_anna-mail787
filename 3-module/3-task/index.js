@@ -12,5 +12,3 @@ function camelize(str) {
   const result = strAsArray.filter(x => x !== '-');
   return result.join('');
 }
-
-console.log(camelize('background-color'));

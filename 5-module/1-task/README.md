@@ -4,8 +4,15 @@
 
 ```js
 function hideSelf() {
-  // ваш код...
+  const hideSelfButton = document.querySelector('.hide-self-button');
+  hideSelfButton.addEventListener = ('click', function() {
+    hideSelfButton.setAttribute('hidde', 'hidden');
+  }
 }
+
+document.addEventListener("click", function(){
+  document.getElementById("demo").innerHTML = "Hello World";
+});
 
 hideSelf();
 ```

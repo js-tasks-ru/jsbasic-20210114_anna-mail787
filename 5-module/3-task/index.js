@@ -8,7 +8,7 @@ function initCarousel() {
   const slideWidth = slide.offsetWidth;
 
   let slideIndex = 1;
-  const fistSlideIndex = 1;
+  const firstSlideIndex = 1;
   checkRightButton(arrowRight);
   checkLeftButton(arrowLeft);
 
@@ -33,6 +33,7 @@ function initCarousel() {
   function prevSlide() {
     carousel.style.transform = `translateX(${-1 * slideWidth * (slideIndex - 2)}px)`;
       slideIndex = slideIndex - 1;
+
   }
 
   function checkRightButton(button) {
@@ -44,7 +45,7 @@ function initCarousel() {
   }
 
   function checkLeftButton(button) {
-    if (slideIndex === fistSlideIndex) {
+    if (slideIndex === firstSlideIndex) {
       button.style.display = 'none';
       return;
     }

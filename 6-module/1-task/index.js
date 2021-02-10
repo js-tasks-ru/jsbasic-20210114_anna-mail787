@@ -65,7 +65,7 @@ export default class UserTable {
   }
 
   removeRow(event) {
-    if (event.target.className != 'removeButton') return;
+    if (event.target.className !== 'removeButton') return;
       let tr = event.target.closest('tr');
       tr.remove();
   }

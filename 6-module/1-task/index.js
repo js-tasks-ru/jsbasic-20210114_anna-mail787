@@ -32,50 +32,41 @@ export default class UserTable {
 
   constructor(rows) {
     this.elem = document.createElement('table');
-    const thead = document.createElement('thead');
-    this.elem.append(thead);
-    const theadRow = document.createElement('tr');
-    thead.append(theadRow);
-    let th = document.createElement('th');
-    th.textContent = 'Имя';
-    theadRow.append(th);
-    th.textContent = 'Возраст';
-    theadRow.append(th);
-    th.textContent = 'Зарплата';
-    theadRow.append(th);
-    th.textContent = 'Город';
-    theadRow.append(th);
-    th.textContent = '';
-    theadRow.append(th);
-    const tbody = document.createElement('tbody');
-    this.elem.append(tbody);
-
-    for (let row of rows) {
-      const tr = document.createElement('tr');
-      tbody.append(tr);
-      for (let key in row) {
-        const td = document.createElement('td');
-        td.textContent = row[key];
-        tr.append(td);
-      }
-      const buttonTd = document.createElement('td');
-      buttonTd.innerHTML = '<button class="removeButton">X</button>';
-      tr.append(buttonTd);
-    }
-
-    this.clickHandler = this.clickHandler.bind(this);
-    this.bindEvents();
+    this.render(rows);
+    this.elem.addEventListener('click', (event) => this.removeRow(event));
   }
 
-  bindEvents() {
-    this.elem.addEventListener('click', this.clickHandler);
+  render(rows) {
+    const tableRows = rows.map(row => {
+      return `
+        <tr>
+          <td>${row.name}</td>
+          <td>${row.age}</td>
+          <td>${row.salary}</td>
+          <td>${row.city}</td>
+          <td><button class="removeButton">X</button></td>
+        </tr>
+        `
+    }).join('');
+    this.elem.innerHTML = `
+      <thead>
+      <tr>
+          <th>Имя</th>
+          <th>Возраст</th>
+          <th>Зарплата</th>
+          <th>Город</th>
+          <th></th>
+      </tr>
+      </thead>
+      <tbody>
+          ${tableRows};
+      </tbody>
+    `
   }
 
-  clickHandler(event) {
+  removeRow(event) {
     if (event.target.className != 'removeButton') return;
-
       let tr = event.target.closest('tr');
       tr.remove();
-
   }
 }

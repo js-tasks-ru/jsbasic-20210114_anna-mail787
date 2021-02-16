@@ -43,55 +43,61 @@ export default class Carousel {
     const arrowLeft = this.elem.querySelector('.carousel__arrow_left');
     const carousel = this.elem.querySelector('.carousel__inner');
     const slides = this.elem.querySelectorAll('.carousel__slide');
-    const slide = this.elem.querySelector('.carousel__slide');
-
-    let slideIndex = 0;
     const FIRST_SLIDE_INDEX = 0;
+    let currentSlideIndex = 0;
 
-    startSlider();
 
-    function startSlider() {
-      let slideWidth = slideIndex * -carousel.offsetWidth;
+    const nextSlide = () => {
+      currentSlideIndex = currentSlideIndex + 1;
+      startSlider();
+    }
+
+    const prevSlide = () => {
+      currentSlideIndex = currentSlideIndex - 1;
+      startSlider();
+    }
+
+    this.elem.addEventListener('click', (evt) => {
+      console.log(evt.target.closest);
+      if (evt.target.closest('.carousel__arrow_right')) {
+        nextSlide();
+      }
+      if (evt.target.closest('.carousel__arrow_left')) {
+        prevSlide();
+      }
+      if (evt.target.closest('.carousel__button')) {
+        console.log(currentSlideIndex);
+        console.log(this.slides[currentSlideIndex].id);
+        this.elem.dispatchEvent(new CustomEvent('product-add', {
+          /*detail: this.slides[currentSlideIndex].id,*/
+          detail: evt.target.closest('.carousel__slide').dataset.id,
+          bubbles: true
+        }))
+      }
+    })
+
+    const checkRightButton = (button) => {
+      if (currentSlideIndex === slides.length - 1) {
+        button.style.display = 'none';
+        return;
+      }
+      button.style.display = '';
+    }
+
+    const checkLeftButton = (button) => {
+      if (currentSlideIndex === FIRST_SLIDE_INDEX) {
+        button.style.display = 'none';
+        return;
+      }
+      button.style.display = '';
+    }
+
+    const startSlider = () => {
+      let slideWidth = currentSlideIndex * -carousel.offsetWidth;
       carousel.style.transform = `translateX(${slideWidth}px)`;
       checkRightButton(arrowRight);
       checkLeftButton(arrowLeft);
     }
-
-    this.elem.addEventListener('click', function(event) {
-      console.log(event.target);
-      if (event.target.closest('.carousel__arrow_right')) {
-        nextSlide();
-      }
-      if (event.target.closest('.carousel__arrow_left')) {
-        prevSlide();
-      }
-    })
-
-    function nextSlide() {
-      slideIndex = slideIndex + 1;
-      startSlider();
-    }
-
-    function prevSlide() {
-      slideIndex = slideIndex - 1;
-      startSlider();
-    }
-
-    function checkRightButton(button) {
-      if (slideIndex === slides.length - 1) {
-        button.style.display = 'none';
-        return;
-      }
-      button.style.display = '';
-
-    }
-
-    function checkLeftButton(button) {
-      if (slideIndex === FIRST_SLIDE_INDEX) {
-        button.style.display = 'none';
-        return;
-      }
-      button.style.display = '';
-    }
+    startSlider();
   }
 }

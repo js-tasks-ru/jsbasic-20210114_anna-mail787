@@ -1,14 +1,20 @@
 function initCarousel() {
   const carouselContainer = document.querySelector('.carousel');
   const arrowRight = document.querySelector('.carousel__arrow_right');
+  console.log(`.carousel__arrow_right ${arrowRight}`);
   const arrowLeft = document.querySelector('.carousel__arrow_left');
+  console.log(`.carousel__arrow_left ${arrowLeft}`);
   const carousel = document.querySelector('.carousel__inner');
+  console.log(`.carousel__inner ${carousel}`);
   const slides = carousel.querySelectorAll('.carousel__slide');
+  console.log(`.carousel__slide ${slides}`);
   const slide = carousel.querySelector('.carousel__slide');
+  console.log(`.carousel__slide ${slide}`);
   const slideWidth = slide.offsetWidth;
+  console.log(`slideWidth ${slideWidth}`);
 
   let slideIndex = 1;
-  const fistSlideIndex = 1;
+  const firstSlideIndex = 1;
   checkRightButton(arrowRight);
   checkLeftButton(arrowLeft);
 
@@ -33,6 +39,7 @@ function initCarousel() {
   function prevSlide() {
     carousel.style.transform = `translateX(${-1 * slideWidth * (slideIndex - 2)}px)`;
       slideIndex = slideIndex - 1;
+
   }
 
   function checkRightButton(button) {
@@ -44,7 +51,7 @@ function initCarousel() {
   }
 
   function checkLeftButton(button) {
-    if (slideIndex === fistSlideIndex) {
+    if (slideIndex === firstSlideIndex) {
       button.style.display = 'none';
       return;
     }

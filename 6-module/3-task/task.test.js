@@ -125,6 +125,7 @@ describe('6-module-3-task', () => {
       ' если кликнули на 2 слайд', () => {
       let addButtons = sut.elem.querySelectorAll('.carousel__button');
       addButtons[1].dispatchEvent(clickEvent);
+
       expect(productAddEvent.detail).toBe(testSlides[1].id);
     });
   });
